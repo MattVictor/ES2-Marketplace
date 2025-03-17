@@ -1,4 +1,6 @@
 package entities;
 
-public class Admin {
+import abstracts.Entities;
+
+public class Admin extends Entities {
 }

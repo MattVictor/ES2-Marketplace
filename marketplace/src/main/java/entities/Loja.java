@@ -2,10 +2,23 @@ package entities;
 
 import abstracts.Entities;
 
+import java.util.ArrayList;
+
 public class Loja extends Entities {
     private String CNPJ;
-
+    private ArrayList<Produto> produtos;
     protected Loja() {}
+
+    public Loja(int id, String nome, String email, String senha, String CPF, String CNPJ, String endereco, ArrayList<Produto> produtos) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.CPF = CPF;
+        this.CNPJ = CNPJ;
+        this.endereco = endereco;
+        this.produtos = produtos;
+    }
 
     public Loja(int id, String nome, String email, String senha, String CPF, String CNPJ, String endereco) {
         this.id = id;
@@ -15,6 +28,7 @@ public class Loja extends Entities {
         this.CPF = CPF;
         this.CNPJ = CNPJ;
         this.endereco = endereco;
+        this.produtos = new ArrayList<Produto>();
     }
 
     @Override
@@ -23,7 +37,7 @@ public class Loja extends Entities {
                 "email: "+this.email+",\n"+
                 "senha: "+this.senha+",\n"+
                 "CAD:"+this.CPF+",\n"+
-                "endereco"+this.endereco+"\n"+
+                "endereco: "+this.endereco+"\n"+
                 "}";
     }
 

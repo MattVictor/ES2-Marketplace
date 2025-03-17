@@ -16,97 +16,41 @@ public class DataBaseManager {
         gson = new Gson();
     }
 
-    public JsonElement parseData(){
+    public Object[] parseData(){
         String content = new String();
+        JsonArray jsonArray = new JsonArray();
 
         try {
-            content = IOUtils.toString(new FileReader("marketplace/src/main/java/DataBase/"+dataBase+".json"));
+            FileReader fileReader = new FileReader("marketplace/src/main/java/DataBase/Data/"+dataBase+".json");
+            content = IOUtils.toString(fileReader);
         } catch (FileNotFoundException e) {
-            System.out.println("Arquivo não encontrado: " + e.getMessage());
+            System.out.println(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }finally {
+            jsonArray = this.gson.fromJson(content, JsonArray.class);
         }
 
-        JsonArray jsonObject = this.gson.fromJson(content, JsonArray.class);
+        Object[] objects = new Object[jsonArray.size()];
 
+        for (int i = 0; i < jsonArray.size(); i++) {
+            objects[i] = gson.fromJson(jsonArray.get(i), c);
+        }
 
-        return jsonObject;
+        return objects;
     }
 
-    public void writeData(JsonArray arr) {
-        try (Writer writer = new FileWriter("marketplace/src/main/java/DataBase/"+dataBase+".json")) {
+    public void writeData(Object[] arr) {
+        JsonArray jsonArray = new JsonArray();
+        for (int i = 0; i < arr.length; i++) {
+            jsonArray.add(gson.toJson(arr[i],c));
+        }
+
+        try (Writer writer = new FileWriter("marketplace/src/main/java/DataBase/Data/"+dataBase+".json")) {
             Gson gson = new GsonBuilder().create();
             gson.toJson(arr, writer);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public Object getData(int id){
-        JsonArray jsonArray = parseData().getAsJsonArray();
-
-        for(JsonElement jsonElement : jsonArray){
-            JsonObject jsonObject = jsonElement.getAsJsonObject();
-            if(id == jsonObject.get("id").getAsInt()){
-                return jsonObject;
-            }
-        }
-
-        return null;
-    }
-
-    public boolean insertData(Object obj){
-        JsonArray jsonArray = parseData().getAsJsonArray();
-
-        String teste = gson.toJson(obj,c);
-
-        JsonObject o = JsonParser.parseString(teste).getAsJsonObject();
-
-        jsonArray.add(o);
-
-        writeData(jsonArray);
-
-        return true;
-    }
-
-    public boolean changeData(int id, Object obj) {
-        JsonArray jsonArray = parseData().getAsJsonArray();
-
-        for(JsonElement jsonElement : jsonArray){
-            JsonObject jsonObject = jsonElement.getAsJsonObject();
-            if(id == jsonObject.get("id").getAsInt()){
-                jsonArray.remove(jsonObject);
-                String teste = gson.toJson(obj,c);
-
-                JsonObject o = JsonParser.parseString(teste).getAsJsonObject();
-
-                jsonArray.add(o);
-                break;
-            }
-        }
-
-        writeData(jsonArray);
-
-        return true;
-    }
-
-    public boolean deleteData(int id){
-        JsonArray jsonArray = parseData().getAsJsonArray();
-
-        for(JsonElement jsonElement : jsonArray){
-            JsonObject jsonObject = jsonElement.getAsJsonObject();
-            if(id == jsonObject.get("id").getAsInt()){
-                jsonArray.remove(jsonObject);
-                break;
-            }
-        }
-
-        writeData(jsonArray);
-
-        return true;
-    }
-
-    public int getDataBaseSize(){
-        return parseData().getAsJsonArray().size();
     }
 }
