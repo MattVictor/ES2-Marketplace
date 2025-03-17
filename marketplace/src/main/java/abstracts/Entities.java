@@ -1,7 +1,6 @@
 package abstracts;
 
 public abstract class Entities {
-    protected int id;
     protected String nome;
     protected String email;
     protected String senha;
@@ -14,14 +13,6 @@ public abstract class Entities {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {

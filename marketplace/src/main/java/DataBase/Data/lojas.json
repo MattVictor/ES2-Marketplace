@@ -1,1 +1,1 @@
-[{"CNPJ":"1421551","id":12,"nome":"lojaTeste","email":"teste@gmail.com","senha":"senha123","CPF":"12421512","endereco":"Outra Rua Testadora"},{"CNPJ":"1421551","id":15,"nome":"OutraLojaTeste","email":"teste@gmail.com","senha":"senha123","CPF":"12421512","endereco":"rua testadora"}]
+[{"CNPJ":"1421551","nome":"lojaTeste","email":"teste@gmail.com","senha":"senha123","CPF":"12421512","endereco":"Outra Rua Testadora"},{"CNPJ":"1421551","nome":"OutraLojaTeste","email":"teste@gmail.com","senha":"senha123","CPF":"12421512","endereco":"rua testadora"}]

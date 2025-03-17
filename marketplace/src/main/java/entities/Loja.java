@@ -9,8 +9,7 @@ public class Loja extends Entities {
     private ArrayList<Produto> produtos;
     protected Loja() {}
 
-    public Loja(int id, String nome, String email, String senha, String CPF, String CNPJ, String endereco, ArrayList<Produto> produtos) {
-        this.id = id;
+    public Loja(String nome, String email, String senha, String CPF, String CNPJ, String endereco, ArrayList<Produto> produtos) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -20,8 +19,7 @@ public class Loja extends Entities {
         this.produtos = produtos;
     }
 
-    public Loja(int id, String nome, String email, String senha, String CPF, String CNPJ, String endereco) {
-        this.id = id;
+    public Loja(String nome, String email, String senha, String CPF, String CNPJ, String endereco) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;

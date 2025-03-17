@@ -15,10 +15,10 @@ public class Main {
             System.out.println(cliente);
         }
 
-        data.removeCliente(0);
-
-        for (Cliente cliente : clientes) {
-            System.out.println(cliente);
-        }
+//        data.removeCliente(0);
+//
+//        for (Cliente cliente : clientes) {
+//            System.out.println(cliente);
+//        }
     }
 }
