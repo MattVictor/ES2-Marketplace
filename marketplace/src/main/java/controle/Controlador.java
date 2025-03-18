@@ -5,6 +5,7 @@ import static controle.Estados.*;
 
 public class Controlador {
 
+    private final AcessarDados acessarDados = new AcessarDados();
     private final Registrador registrador = new Registrador();
     private final Autenticador autenticador = new Autenticador();
     private final Menus menu = new Menus();
@@ -12,74 +13,115 @@ public class Controlador {
 
     public Estados executarMenu() {
 
-        if (estadoAtual.equals(MENU_PRINCIPAL)) {
-            String resposta = menu.desenharMenuPrincipal();
-            int respostaInt = Integer.parseInt(resposta);
+        String resposta;
+        String[] dados;
+        int respostaInt;
+        boolean loginValido;
 
-            estadoAtual = respostaInt == 4? estadoAtual.voltar() : estadoAtual.avancar(respostaInt-1);
-        }
+        switch (estadoAtual) {
 
-        else if (estadoAtual.equals(LOGIN_ADMIN)) {
-            String[] resposta = menu.desenharMenuLoginAdministrador();
-            boolean loginValido = autenticador.autenticarAdmin(resposta[0], resposta[1]);
+            case MENU_PRINCIPAL:
+                resposta = menu.desenharMenuPrincipal();
+                respostaInt = Integer.parseInt(resposta);
 
-            estadoAtual = loginValido? estadoAtual.avancar() : estadoAtual.voltar();
-        }
+                estadoAtual = respostaInt == 4? estadoAtual.voltar() : estadoAtual.avancar(respostaInt-1);
+                break;
 
-        else if (estadoAtual.equals(MENU_CLIENTE)) {
-            String resposta = menu.desenharMenuCliente();
-            int respostaInt = Integer.parseInt(resposta);
+            case LOGIN_ADMIN:
+                dados = menu.desenharMenuLoginAdministrador();
+                loginValido = autenticador.autenticarAdmin(dados[0], dados[1]);
 
-            estadoAtual = respostaInt == 3? estadoAtual.voltar(): estadoAtual.avancar(respostaInt-1);
-        }
+                estadoAtual = loginValido? estadoAtual.avancar() : estadoAtual.voltar();
+                break;
 
-        else if (estadoAtual.equals(MENU_LOJAS)) {
-            String resposta = menu.desenharMenuLoja();
-            int respostaInt = Integer.parseInt(resposta);
+            case MENU_CLIENTE:
+                resposta = menu.desenharMenuCliente();
+                respostaInt = Integer.parseInt(resposta);
 
-            estadoAtual = respostaInt == 3? estadoAtual.voltar() : estadoAtual.avancar(respostaInt-1);
-        }
+                estadoAtual = respostaInt == 4? estadoAtual.voltar(): estadoAtual.avancar(respostaInt-1);
+                break;
 
-        else if (estadoAtual.equals(LOGIN_CLIENTE)) {
-            String[] resposta = menu.desenharMenuLoginCliente();
-            boolean loginValido = autenticador.autenticarCliente(resposta[0], resposta[1]);
+            case MENU_LOJAS:
+                resposta = menu.desenharMenuLoja();
+                respostaInt = Integer.parseInt(resposta);
 
-            estadoAtual = loginValido? estadoAtual.avancar() : estadoAtual.voltar();
-        }
+                estadoAtual = respostaInt == 4? estadoAtual.voltar() : estadoAtual.avancar(respostaInt-1);
+                break;
 
-        else if (estadoAtual.equals(LOGIN_LOJAS)) {
-            String[] resposta = menu.desenharMenuLoginLoja();
-            boolean loginValido = autenticador.autenticarLoja(resposta[0], resposta[1]);
+            case LOGIN_CLIENTE:
+                dados = menu.desenharMenuLoginCliente();
+                loginValido = autenticador.autenticarCliente(dados[0], dados[1]);
 
-            estadoAtual = loginValido? estadoAtual.avancar() : estadoAtual.voltar();
-        }
+                estadoAtual = loginValido? estadoAtual.avancar() : estadoAtual.voltar();
+                break;
 
-        else if (estadoAtual.equals(CADASTRO_CLIENTE)) {
-            String[] resposta = menu.desenharMenuCadastrarCliente();
-            registrador.registrarCliente(resposta);
+            case LOGIN_LOJAS:
+                dados = menu.desenharMenuLoginLoja();
+                loginValido = autenticador.autenticarLoja(dados[0], dados[1]);
 
-            estadoAtual = estadoAtual.voltar();
-        }
+                estadoAtual = loginValido? estadoAtual.avancar() : estadoAtual.voltar();
+                break;
 
-        else if (estadoAtual.equals(CADASTRO_LOJAS)) {
-            String[] resposta = menu.desenharMenuCadastrarLoja();
-            registrador.registrarLoja(resposta);
+            case CADASTRO_CLIENTE:
+                dados = menu.desenharMenuCadastrarCliente();
+                registrador.registrarCliente(dados);
+                estadoAtual = estadoAtual.voltar();
+                break;
 
-            estadoAtual = estadoAtual.voltar();
-        }
+            case DELETAR_CLIENTE:
+                dados = menu.desenharMenuDeletarCliente();
+                registrador.deletarCliente(dados);
+                estadoAtual = estadoAtual.voltar();
+                break;
 
-        else if (estadoAtual.equals(LOJA_PARA_CLIENTE)) {
-            String resposta = menu.desenharLojaParaCliente();
-            int respostaInt = Integer.parseInt(resposta);
+            case CADASTRO_LOJAS:
+                dados = menu.desenharMenuCadastrarLoja();
+                registrador.registrarLoja(dados);
+                estadoAtual = estadoAtual.voltar();
+                break;
 
-            estadoAtual =  estadoAtual.voltar();
-        }
+            case DELETAR_LOJAS:
+                dados = menu.desenharMenuDeletarLoja();
+                registrador.deletarLoja(dados);
+                estadoAtual = estadoAtual.voltar();
+                break;
 
-        else if (estadoAtual.equals(PAINEL_PARA_LOJA)) {
-            String resposta = menu.desenharPainelParaLoja();
-            int respostaInt = Integer.parseInt(resposta);
+            case LOJA_PARA_CLIENTE:
+                resposta = menu.desenharLojaParaCliente();
+                respostaInt = Integer.parseInt(resposta);
+                estadoAtual =  estadoAtual.voltar();
+                break;
 
-            estadoAtual =  estadoAtual.voltar();
+            case PAINEL_PARA_LOJA:
+                resposta = menu.desenharPainelParaLoja();
+                respostaInt = Integer.parseInt(resposta);
+                estadoAtual =  estadoAtual.voltar();
+                break;
+
+            case MENU_ADMIN:
+                resposta = menu.desenharMenuAdministrador();
+
+                switch (resposta) {
+                    case "1": acessarDados.listarAdmins(); break;
+                    case "2": acessarDados.listarClientes(); break;
+                    case "3": acessarDados.listarLojas(); break;
+                    case "4": estadoAtual = estadoAtual.avancar(0); break;
+                    case "5": estadoAtual = estadoAtual.avancar(1); break;
+                    case "6": estadoAtual = estadoAtual.voltar(); break;
+                }
+                break;
+
+            case CADASTRO_ADMIN:
+                dados = menu.desenharMenuCadastrarAdmin();
+                registrador.registrarAdmin(dados);
+                estadoAtual = estadoAtual.voltar();
+                break;
+
+            case DELETAR_ADMIN:
+                dados = menu.desenharMenuDeletarAdmin();
+                registrador.deletarAdmin(dados);
+                estadoAtual = estadoAtual.voltar();
+                break;
         }
 
         return estadoAtual;

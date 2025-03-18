@@ -19,8 +19,12 @@ public class Menus {
     public String desenharMenuAdministrador() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("--MENU DO ADMINISTRADOR--");
-        System.out.println(" *Opções futuras aqui* ");
-        System.out.println(" 1 - Voltar");
+        System.out.println(" 1 - Listar Administradores ");
+        System.out.println(" 2 - Listar Clientes ");
+        System.out.println(" 3 - Listar Lojas ");
+        System.out.println(" 4 - Cadastrar novo administrador");
+        System.out.println(" 5 - Deletar administrador");
+        System.out.println(" 6 - Voltar");
 
         return scanner.nextLine();
     }
@@ -48,7 +52,8 @@ public class Menus {
         System.out.println(" Como deseja entrar? ");
         System.out.println("1 - Fazer Login");
         System.out.println("2 - Novo cadastro");
-        System.out.println("3 - Voltar");
+        System.out.println("3 - Deletar cadastro");
+        System.out.println("4 - Voltar");
 
         return scanner.nextLine();
     }
@@ -60,7 +65,8 @@ public class Menus {
         System.out.println(" Como deseja entrar? ");
         System.out.println("1 - Fazer Login");
         System.out.println("2 - Novo cadastro");
-        System.out.println("3 - Voltar");
+        System.out.println("3 - Deletar cadastro");
+        System.out.println("4 - Voltar");
 
         return scanner.nextLine();
     }
@@ -77,13 +83,37 @@ public class Menus {
         return new String[]{email, senha};
     }
 
+    public String[] desenharMenuDeletarAdmin() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("--DELETAR ADMINISTRADOR--");
+        System.out.println(" Digite o e-mail: ");
+        String email = scanner.nextLine();
+        System.out.println(" Digite a senha: ");
+        String senha = scanner.nextLine();
+
+        return new String[]{email, senha};
+    }
+
     public String[] desenharMenuLoginCliente() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("--LOGIN CLIENTE--");
+        System.out.println("--DELETAR CLIENTE--");
         System.out.println(" Digite seu CPF: ");
         String cpf = scanner.nextLine();
         System.out.println(" Digite sua senha: ");
+        String senha = scanner.nextLine();
+
+        return new String[]{cpf, senha};
+    }
+
+    public String[] desenharMenuDeletarCliente() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("--LOGIN CLIENTE--");
+        System.out.println(" Digite o CPF: ");
+        String cpf = scanner.nextLine();
+        System.out.println(" Digite a senha: ");
         String senha = scanner.nextLine();
 
         return new String[]{cpf, senha};
@@ -101,11 +131,32 @@ public class Menus {
         return new String[]{cnpj, senha};
     }
 
+    public String[] desenharMenuDeletarLoja() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("--DELETAR LOJA--");
+        System.out.println(" Digite o CNPJ: ");
+        String cnpj = scanner.nextLine();
+        System.out.println(" Digite a senha: ");
+        String senha = scanner.nextLine();
+
+        return new String[]{cnpj, senha};
+    }
+
     public String[] desenharMenuCadastrarCliente() {
         Scanner scanner = new Scanner(System.in);
 
         String[] dados = {"nome","email","cpf","endereco"};
         System.out.println("--CADASTRAR CLIENTE--");
+
+        return inputDados(dados);
+    }
+
+    public String[] desenharMenuCadastrarAdmin() {
+        Scanner scanner = new Scanner(System.in);
+
+        String[] dados = {"nome","email","cpf","endereco"};
+        System.out.println("--CADASTRAR ADMINISTRADOR--");
 
         return inputDados(dados);
     }
