@@ -9,10 +9,15 @@ import entities.Loja;
 import java.util.ArrayList;
 
 public class Autenticador {
+    DataAdmins dataAdmins;
+    DataClientes dataClientes;
+    DataLojas dataLojas;
 
-    DataAdmins dataAdmins = new DataAdmins();
-    DataClientes dataClientes = new DataClientes();
-    DataLojas dataLojas = new DataLojas();
+    public Autenticador(Registrador registrador) {
+        this.dataAdmins = registrador.getDataAdmins();
+        this.dataClientes = registrador.getDataClientes();
+        this.dataLojas = registrador.getDataLojas();
+    }
 
     public boolean autenticarAdmin(String email, String senha) {
         ArrayList<Admin> admins = dataAdmins.getAdmins();

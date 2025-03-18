@@ -14,6 +14,14 @@ public class Admin extends Entities {
         this.endereco = endereco;
     }
 
+    public Admin (String[] dados) {
+        this.nome = dados[0];
+        this.email = dados[1];
+        this.CPF = dados[2];
+        this.endereco = dados[3];
+        this.senha = dados[4];
+    }
+
     public String getCPF() {
         return CPF;
     }

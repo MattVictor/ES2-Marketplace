@@ -6,7 +6,7 @@ import static controle.Estados.*;
 public class Controlador {
 
     private final Registrador registrador = new Registrador();
-    private final Autenticador autenticador = new Autenticador();
+    private final Autenticador autenticador = new Autenticador(registrador);
     private final Menus menu = new Menus();
     private Estados estadoAtual = MENU_PRINCIPAL;
 
