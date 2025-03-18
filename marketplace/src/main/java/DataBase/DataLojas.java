@@ -28,13 +28,17 @@ public class DataLojas {
         return lojas.get(id);
     }
 
-    public void addLoja(Loja admin) {
+    public Loja addLoja(Loja admin) {
         lojas.add(admin);
         data.writeData(lojas.toArray());
+
+        return admin;
     }
 
-    public void removeLoja(int id) {
+    public Loja removeLoja(int id) {
         lojas.remove(id);
         data.writeData(lojas.toArray());
+
+        return getLoja(id);
     }
 }
