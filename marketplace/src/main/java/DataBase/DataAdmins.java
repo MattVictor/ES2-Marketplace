@@ -28,13 +28,17 @@ public class DataAdmins {
         return admins.get(id);
     }
 
-    public void addAdmin(Admin admin) {
+    public Admin addAdmin(Admin admin) {
         admins.add(admin);
         data.writeData(admins.toArray());
+
+        return admin;
     }
 
-    public void removeAdmin(int id) {
+    public Admin removeAdmin(int id) {
         admins.remove(id);
         data.writeData(admins.toArray());
+
+        return getAdmin(id);
     }
 }

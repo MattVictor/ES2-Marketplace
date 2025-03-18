@@ -12,15 +12,19 @@ public class Registrador {
     DataClientes dataClientes = new DataClientes();
     DataLojas dataLojas  = new DataLojas();
 
-    public void registrarCliente(String[] dados) {
+    public Cliente registrarCliente(String[] dados) {
         Cliente cliente = new Cliente(dados);
 
         dataClientes.addCliente(cliente);
+
+        return cliente;
     }
 
-    public void registrarLoja(String[] dados) {
+    public Loja registrarLoja(String[] dados) {
         Loja loja = new Loja(dados);
 
         dataLojas.addLoja(loja);
+
+        return loja;
     }
 }

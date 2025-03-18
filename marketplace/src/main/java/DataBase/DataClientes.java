@@ -28,14 +28,18 @@ public class DataClientes {
         return clientes.get(id);
     }
 
-    public void addCliente(Cliente cliente) {
+    public Cliente addCliente(Cliente cliente) {
         clientes.add(cliente);
         saveCurrentData();
+
+        return cliente;
     }
 
-    public void removeCliente(int id) {
+    public Cliente removeCliente(int id) {
         clientes.remove(id);
         saveCurrentData();
+
+        return getCliente(id);
     }
 
     public void saveCurrentData(){
