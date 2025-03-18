@@ -4,7 +4,6 @@ public abstract class Entities {
     protected String nome;
     protected String email;
     protected String senha;
-    protected String CPF;
     protected String endereco;
 
     public String getEmail() {
@@ -29,14 +28,6 @@ public abstract class Entities {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public String getCPF() {
-        return CPF;
-    }
-
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
     }
 
     public String getEndereco() {
