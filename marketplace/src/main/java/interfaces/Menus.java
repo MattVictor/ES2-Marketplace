@@ -98,7 +98,7 @@ public class Menus {
     public String[] desenharMenuLoginCliente() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("--DELETAR CLIENTE--");
+        System.out.println("--LOGIN CLIENTE--");
         System.out.println(" Digite seu CPF: ");
         String cpf = scanner.nextLine();
         System.out.println(" Digite sua senha: ");
@@ -110,7 +110,7 @@ public class Menus {
     public String[] desenharMenuDeletarCliente() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("--LOGIN CLIENTE--");
+        System.out.println("--DELETAR CLIENTE--");
         System.out.println(" Digite o CPF: ");
         String cpf = scanner.nextLine();
         System.out.println(" Digite a senha: ");
