@@ -3,6 +3,8 @@ package DataBase;
 import com.google.gson.*;
 import org.apache.commons.io.IOUtils;
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class DataBaseManager {
     String dataBase;
@@ -20,8 +22,10 @@ public class DataBaseManager {
         String content = new String();
         JsonArray jsonArray;
 
+        String path = getJsonPath(dataBase);
+
         try {
-            FileReader fileReader = new FileReader("src/main/java/DataBase/Data/"+dataBase+".json");
+            FileReader fileReader = new FileReader(path);
             content = IOUtils.toString(fileReader);
         } catch (FileNotFoundException e) {
             System.out.println(e);
@@ -46,11 +50,29 @@ public class DataBaseManager {
             jsonArray.add(gson.toJson(arr[i],c));
         }
 
-        try (Writer writer = new FileWriter("src/main/java/DataBase/Data/"+dataBase+".json")) {
+        String path = getJsonPath(dataBase);
+
+        try (Writer writer = new FileWriter(path)) {
             Gson gson = new GsonBuilder().create();
             gson.toJson(arr, writer);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static String getJsonPath(String jsonName) {
+        String basePath = System.getProperty("user.dir");
+        String relativePath = "src/main/java/DataBase/Data/"+jsonName+".json";
+
+        // Se estiver rodando do repositório root (exemplo: marketplace/)
+        File file = new File(basePath, relativePath);
+        if (!file.exists()) {
+
+            // Se não existir, tenta remover o prefixo "marketplace/"
+            relativePath = "marketplace/" + relativePath;
+            file = new File(basePath, relativePath);
+        }
+
+        return file.getAbsolutePath();
     }
 }
