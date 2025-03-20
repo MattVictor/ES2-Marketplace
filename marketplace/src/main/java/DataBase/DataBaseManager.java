@@ -18,10 +18,10 @@ public class DataBaseManager {
 
     public Object[] parseData(){
         String content = new String();
-        JsonArray jsonArray = new JsonArray();
+        JsonArray jsonArray;
 
         try {
-            FileReader fileReader = new FileReader("marketplace/src/main/java/DataBase/Data/"+dataBase+".json");
+            FileReader fileReader = new FileReader("src/main/java/DataBase/Data/"+dataBase+".json");
             content = IOUtils.toString(fileReader);
         } catch (FileNotFoundException e) {
             System.out.println(e);
@@ -46,7 +46,7 @@ public class DataBaseManager {
             jsonArray.add(gson.toJson(arr[i],c));
         }
 
-        try (Writer writer = new FileWriter("marketplace/src/main/java/DataBase/Data/"+dataBase+".json")) {
+        try (Writer writer = new FileWriter("src/main/java/DataBase/Data/"+dataBase+".json")) {
             Gson gson = new GsonBuilder().create();
             gson.toJson(arr, writer);
         } catch (IOException e) {

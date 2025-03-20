@@ -1,14 +1,14 @@
 package controle;
 
-import interfaces.Menus;
+import interfaces.MenusFacade;
 import static controle.Estados.*;
 
 public class Controlador {
 
     private final AcessarDados acessarDados = new AcessarDados();
     private final Registrador registrador = new Registrador();
-    private final Autenticador autenticador = new Autenticador(registrador);
-    private final Menus menu = new Menus();
+    private final Autenticador autenticador = new Autenticador();
+    private final MenusFacade menu = new MenusFacade();
     private Estados estadoAtual = MENU_PRINCIPAL;
 
     public Estados executarMenu() {
@@ -28,7 +28,7 @@ public class Controlador {
                 break;
 
             case LOGIN_ADMIN:
-                dados = menu.desenharMenuLoginAdministrador();
+                dados = menu.desenharMenuLoginAdmin();
                 loginValido = autenticador.autenticarAdmin(dados[0], dados[1]);
 
                 estadoAtual = loginValido? estadoAtual.avancar() : estadoAtual.voltar();
@@ -99,7 +99,7 @@ public class Controlador {
                 break;
 
             case MENU_ADMIN:
-                resposta = menu.desenharMenuAdministrador();
+                resposta = menu.desenharMenuAdmin();
 
                 switch (resposta) {
                     case "1": acessarDados.listarAdmins(); break;

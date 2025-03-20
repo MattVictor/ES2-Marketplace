@@ -1,24 +1,22 @@
 package controle;
 
-import entities.*;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
 public class AutenticadorTest {
 
-    Registrador registrador;
-    Autenticador autenticador;
+    static Registrador registrador;
+    static Autenticador autenticador;
 
     @Before
     public void setUp() {
         registrador = new Registrador();
+        autenticador = new Autenticador();
 
-        String[] admin = {"adminTest", "admin@gmail.com", "senha123", "12345678900", "rua tal"};
-        String[] cliente = {"clienteTest", "cliente@gmail.com", "senha123", "12345678900", "Rua das ruas"};
+        String[] admin = {"adminTest", "admin@gmail.com", "12345678900", "rua tal", "senha123"};
+        String[] cliente = {"clienteTest", "cliente@gmail.com", "12345678900", "Rua das ruas", "senha123"};
         String[] loja = {"lojaTest", "teste@gmail.com", "12345678000195", "Rua das lojas amarelas", "senha123"};
 
         registrador.registrarAdmin(admin);
@@ -58,6 +56,7 @@ public class AutenticadorTest {
 
     @Test
     public void autenticarCliente_FalhaSenha() {
+        System.out.println("teste iniciado");
         boolean resultado = autenticador.autenticarCliente("12345678900", "senhaErrada");
         assertFalse(resultado);
     }
