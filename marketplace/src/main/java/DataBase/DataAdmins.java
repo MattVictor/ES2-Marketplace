@@ -35,10 +35,16 @@ public class DataAdmins {
         return admin;
     }
 
-    public Admin removeAdmin(int id) {
+    public boolean removeAdmin(int id) {
+        if (id < 0 || id >= admins.size()) {
+            throw new IndexOutOfBoundsException("Admin com ID inválido");
+        }
         admins.remove(id);
-        data.writeData(admins.toArray());
+        saveCurrentData();
+        return true;
+    }
 
-        return getAdmin(id);
+    public void saveCurrentData(){
+        data.writeData(admins.toArray());
     }
 }

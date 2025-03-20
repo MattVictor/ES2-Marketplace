@@ -6,12 +6,12 @@ public class Admin extends Entities {
 
     private String CPF;
 
-    public Admin (String nome, String email, String senha, String cpf, String endereco) {
+    public Admin (String nome, String email, String cpf, String endereco, String senha) {
         this.nome = nome;
         this.email = email;
-        this.senha = senha;
         this.CPF = cpf;
         this.endereco = endereco;
+        this.senha = senha;
     }
 
     public Admin (String[] dados) {
@@ -28,5 +28,10 @@ public class Admin extends Entities {
 
     public void setCPF(String CPF) {
         this.CPF = CPF;
+    }
+
+    public String[] getDados() {
+        String[] dados = {this.nome, this.email, this.CPF, this.endereco, this.senha};
+        return dados;
     }
 }

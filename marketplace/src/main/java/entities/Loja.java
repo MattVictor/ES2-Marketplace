@@ -12,18 +12,18 @@ public class Loja extends Entities {
     public Loja(String nome, String email, String CNPJ, String endereco, String senha, ArrayList<Produto> produtos) {
         this.nome = nome;
         this.email = email;
-        this.senha = senha;
         this.CNPJ = CNPJ;
         this.endereco = endereco;
+        this.senha = senha;
         this.produtos = produtos;
     }
 
     public Loja(String nome, String email, String CNPJ, String endereco, String senha) {
         this.nome = nome;
         this.email = email;
-        this.senha = senha;
         this.CNPJ = CNPJ;
         this.endereco = endereco;
+        this.senha = senha;
         this.produtos = new ArrayList<Produto>();
     }
 
@@ -49,13 +49,18 @@ public class Loja extends Entities {
     public String toString() {
         return "{nome: "+this.nome+",\n"+
                 "email: "+this.email+",\n"+
-                "senha: "+this.senha+",\n"+
                 "CNPJ:"+this.CNPJ+",\n"+
                 "endereco: "+this.endereco+"\n"+
+                "senha: "+this.senha+",\n"+
                 "}";
     }
 
     public String getCNPJ() {
         return CNPJ;
+    }
+
+    public String[] getDados() {
+        String[] dados = {this.nome, this.email, this.CNPJ, this.endereco, this.senha};
+        return dados;
     }
 }

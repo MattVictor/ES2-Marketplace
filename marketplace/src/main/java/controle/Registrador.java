@@ -14,55 +14,87 @@ public class Registrador {
     DataClientes dataClientes = new DataClientes();
     DataLojas dataLojas  = new DataLojas();
 
-    public void registrarAdmin(String[] dados) {
+    public Admin registrarAdmin(String[] dados) {
         Admin admin = new Admin(dados);
         dataAdmins.addAdmin(admin);
         System.out.println("Administrador registrado com sucesso.\n");
+
+        return admin;
     }
 
-    public void registrarCliente(String[] dados) {
+    public Cliente registrarCliente(String[] dados) {
         Cliente cliente = new Cliente(dados);
         dataClientes.addCliente(cliente);
         System.out.println("Cliente registrado com sucesso.\n");
+
+        return cliente;
     }
 
-    public void registrarLoja(String[] dados) {
+    public Loja registrarLoja(String[] dados) {
         Loja loja = new Loja(dados);
         dataLojas.addLoja(loja);
         System.out.println("Loja registrada com sucesso.\n");
+
+        return loja;
     }
 
-    public void deletarAdmin(String[] dados) {
-        int id = extrairIDadmin(dados[0],dados[1]);
-        dataAdmins.removeAdmin(id);
-        System.out.println("Administrador deletado com sucesso.\n");
+    public boolean deletarAdmin(String[] dados) {
+        int id = extrairIDadmin(dados[1],dados[4]);
+        boolean result = false;
+        if (id != -1) {
+            result = dataAdmins.removeAdmin(id);
+        }
+        if (result) {
+            System.out.println("Administrador deletado com sucesso.\n");
+            return result;
+        }
+        System.out.println("Administrador nao deletado com sucesso.\n");
+        return false;
     }
 
-    public void deletarCliente(String[] dados) {
-        int id = extrairIDcliente(dados[0],dados[1]);
-        dataClientes.removeCliente(id);
-        System.out.println("Cliente deletado com sucesso.\n");
+    public boolean deletarCliente(String[] dados) {
+        int id = extrairIDcliente(dados[2],dados[4]);
+        boolean result = false;
+        if (id != -1) {
+            result = dataClientes.removeCliente(id);
+        }
+        if (result) {
+            System.out.println("Cliente deletado com sucesso.\n");
+            return result;
+        }
+        System.out.println("Cliente nao deletado com sucesso.\n");
+        return false;
     }
 
-    public void deletarLoja(String[] dados) {
-        int id = extrairIDloja(dados[0],dados[1]);
-        dataLojas.removeLoja(id);
-        System.out.println("Loja deletado com sucesso.\n");
+    public boolean deletarLoja(String[] dados) {
+        int id = extrairIDloja(dados[2],dados[4]);
+        boolean result = false;
+        if (id != -1) {
+            result = dataLojas.removeLoja(id);
+        }
+        if (result) {
+            System.out.println("Loja deletado com sucesso.\n");
+            return result;
+        }
+        System.out.println("Loja nao deletado com sucesso.\n");
+        return false;
     }
 
-    private int extrairIDadmin(String email, String senha) {
+    protected int extrairIDadmin(String email, String senha) {
 
         ArrayList<Admin> admins = dataAdmins.getAdmins();
         for (int i = 0; i < admins.size(); i++) {
             Admin admin = admins.get(i);
             if (admin.getEmail().equals(email) && admin.getSenha().equals(senha)) {
+                System.out.println("ID extraido com sucesso.\n");
                 return i;
             }
         }
+        System.out.println("ID nao encontrado com sucesso.\n");
         return -1;
     }
 
-    private int extrairIDcliente(String cpf, String senha) {
+    protected int extrairIDcliente(String cpf, String senha) {
 
         ArrayList<Cliente> clientes = dataClientes.getClientes();
         for (int i = 0; i < clientes.size(); i++) {
@@ -74,7 +106,7 @@ public class Registrador {
         return -1;
     }
 
-    private int extrairIDloja(String cnpj, String senha) {
+    protected int extrairIDloja(String cnpj, String senha) {
         ArrayList<Loja> lojas = dataLojas.getLojas();
         for (int i = 0; i < lojas.size(); i++) {
             Loja loja = lojas.get(i);

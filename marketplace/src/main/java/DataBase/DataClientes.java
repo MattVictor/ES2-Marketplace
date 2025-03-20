@@ -35,11 +35,13 @@ public class DataClientes {
         return cliente;
     }
 
-    public Cliente removeCliente(int id) {
+    public boolean removeCliente(int id) {
+        if (id < 0 || id >= clientes.size()) {
+            throw new IndexOutOfBoundsException("Cliente com ID inválido");
+        }
         clientes.remove(id);
         saveCurrentData();
-
-        return getCliente(id);
+        return true;
     }
 
     public void saveCurrentData(){

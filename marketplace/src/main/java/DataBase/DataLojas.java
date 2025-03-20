@@ -35,10 +35,17 @@ public class DataLojas {
         return admin;
     }
 
-    public Loja removeLoja(int id) {
+    public boolean removeLoja(int id) {
+        if (id < 0 || id >= lojas.size()) {
+            throw new IndexOutOfBoundsException("Loja com ID inválido");
+        }
         lojas.remove(id);
-        data.writeData(lojas.toArray());
-
-        return getLoja(id);
+        saveCurrentData();
+        return true;
     }
+
+    public void saveCurrentData(){
+        data.writeData(lojas.toArray());
+    }
+
 }

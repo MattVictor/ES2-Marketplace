@@ -3,7 +3,8 @@ package controle;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class AutenticadorTest {
 
@@ -56,7 +57,6 @@ public class AutenticadorTest {
 
     @Test
     public void autenticarCliente_FalhaSenha() {
-        System.out.println("teste iniciado");
         boolean resultado = autenticador.autenticarCliente("12345678900", "senhaErrada");
         assertFalse(resultado);
     }
